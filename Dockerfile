@@ -25,7 +25,7 @@ COPY ./xl2tpd_1.3.11-1_amd64.deb /opt/src/xl2tpd_1.3.11-1_amd64.deb
 RUN dpkg -i /opt/src/xl2tpd_1.3.11-1_amd64.deb
 
 VOLUME ["/lib/modules"]
-VOLUME ["/home/mbvpn/.ssh/id_rsa.pub"]
+VOLUME ["/home/mbvpn/.ssh/authorized_keys"]
 
 CMD ["/opt/src/run.sh"]
 
