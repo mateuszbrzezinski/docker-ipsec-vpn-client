@@ -15,7 +15,7 @@ RUN apt-get -yqq update \
        apt-get -yqq --no-install-recommends install \
          ssh vim telnet curl python
 
-RUN useradd mbvpn && mkdir /home/mbvpn/.ssh
+RUN adduser --disabled-password --gecos "" mbvpn && mkdir /home/mbvpn/.ssh
 
 COPY ./run.sh /opt/src/run.sh
 RUN chmod 755 /opt/src/run.sh
