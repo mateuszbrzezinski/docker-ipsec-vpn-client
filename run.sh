@@ -19,8 +19,6 @@
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-dpkg -i /opt/src/xl2tpd_1.3.11-1_amd64.deb
-
 exiterr()  { echo "Error: $1" >&2; exit 1; }
 nospaces() { printf '%s' "$1" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'; }
 noquotes() { printf '%s' "$1" | sed -e 's/^"\(.*\)"$/\1/' -e "s/^'\(.*\)'$/\1/"; }
@@ -47,12 +45,6 @@ fi
 ip link delete dummy0 >/dev/null 2>&1
 
 mkdir -p /opt/src
-#vpn_env="/opt/src/vpn-gen.env"
-
-#$VPN_IPSEC_PSK="$(cat $vpn_env  | grep VPN_IPSEC_PSK | cut -d'=' -f2)"
-#$VPN_USER="$(cat $vpn_env  | grep VPN_USER | cut -d'=' -f2)"
-#$VPN_PASSWORD="$(cat $vpn_env  | grep VPN_PASSWORD | cut -d'=' -f2)"
-
 
 # Remove whitespace and quotes around VPN variables, if any
 VPN_IPSEC_PSK="$(nospaces "$VPN_IPSEC_PSK")"
@@ -165,7 +157,6 @@ EOF
 chmod 600 /etc/ppp/options.l2tpd.client
 
 
-
 cat <<EOF
 
 ================================================
@@ -177,7 +168,7 @@ Connect to the VPN with these details:
 Server IP: $PUBLIC_IP
 IPsec PSK: $VPN_IPSEC_PSK
 Username: $VPN_USER
-Password: $VPN_PASSWORD
+Password: ***
 
 
 Important notes:   https://git.io/vpnnotes2
@@ -215,4 +206,9 @@ route add default dev ppp0
 #Add statically dns from ppp due to docker issue
 #TODO Need to find a better way to make it work
 cat /etc/ppp/resolv.conf > /etc/resolv.conf
+
+echo `service ssh start`
+
+echo STARTED
+
 /bin/bash
