@@ -16,6 +16,7 @@ RUN apt-get -yqq update \
          ssh vim telnet curl python
 
 RUN adduser --disabled-password --gecos "" mbvpn && mkdir /home/mbvpn/.ssh
+RUN chmod 600 /home/mbvpn/.ssh
 
 COPY ./run.sh /opt/src/run.sh
 RUN chmod 755 /opt/src/run.sh
@@ -29,4 +30,3 @@ VOLUME ["/home/mbvpn/.ssh/id_rsa.pub"]
 CMD ["/opt/src/run.sh"]
 
 EXPOSE 22
-
