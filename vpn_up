@@ -1,0 +1,14 @@
+#!/bin/sh
+FROM_IP=`echo $SSH_CLIENT | awk '{ print $1}'`
+GW=`cat /opt/src/GW`
+PUBLIC_IP=`cat /opt/src/PUBLIC_IP`
+
+#Start the L2TP connection:
+echo "c myvpn" > /var/run/xl2tpd/l2tp-control
+
+#Setup routes
+route add $FROM_IP gw $GW
+route add $PUBLIC_IP gw $GW
+#Wait necessary time for ppp0 to be created
+sleep 5
+route add default dev ppp0

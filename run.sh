@@ -189,21 +189,23 @@ service ipsec restart
 service xl2tpd restart
 
 #Start the IPsec connection:
-ipsec up myvpn
+##ipsec up myvpn
 
 
 #Start the L2TP connection:
-echo "c myvpn" > /var/run/xl2tpd/l2tp-control
+##echo "c myvpn" > /var/run/xl2tpd/l2tp-control
 
 #Setup routes
 GW="$(ip route | grep default | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")"
 echo $GW > /opt/src/GW
-chmod 655 /opt/src/GW
+echo $PUBLIC_IP > /opt/src/PUBLIC_IP
+chmod 655 /opt/src/GW /opt/src/PUBLIC_IP
+
 #route add $LOCAL_IP gw $GW
-route add $PUBLIC_IP gw $GW
+##route add $PUBLIC_IP gw $GW
 #Wait necessary time for ppp0 to be created
-sleep 10
-route add default dev ppp0
+##sleep 10
+##route add default dev ppp0
 
 #Add statically dns from ppp due to docker issue
 #TODO Need to find a better way to make it work

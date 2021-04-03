@@ -1,5 +1,3 @@
 #!/bin/sh
 
-GW=`cat /opt/src/GW`
-FROM_IP=`echo $SSH_CLIENT | awk '{ print $1}'`
-route del $FROM_IP gw $GW
+sudo /opt/src/vpn_down

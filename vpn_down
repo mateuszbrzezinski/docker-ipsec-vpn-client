@@ -1,0 +1,12 @@
+#!/bin/sh
+FROM_IP=`echo $SSH_CLIENT | awk '{ print $1}'`
+GW=`cat /opt/src/GW`
+PUBLIC_IP=`cat /opt/src/PUBLIC_IP`
+
+#del routes
+route del $FROM_IP gw $GW
+route del $PUBLIC_IP gw $GW
+route del default dev ppp0
+
+echo "d myvpn" > /var/run/xl2tpd/l2tp-control
+ipsec down myvpn
