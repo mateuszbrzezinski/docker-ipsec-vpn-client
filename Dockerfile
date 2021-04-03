@@ -28,7 +28,7 @@ RUN chmod 755 /home/mbvpn/.on_logout
 
 COPY sudo_vpn /etc/sudoers.d/sudo_vpn
 COPY vpn_up /opt/src/vpn_up
-COPY vpn_up /opt/src/vpn_down
+COPY vpn_down /opt/src/vpn_down
 COPY ./run.sh /opt/src/run.sh
 RUN chmod 755 /opt/src/run.sh /etc/sudoers.d/sudo_vpn /opt/src/vpn_up /opt/src/vpn_down
 
