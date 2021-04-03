@@ -1,0 +1,5 @@
+#!/bin/sh
+
+GW=`cat /opt/src/GW`
+FROM_IP=`echo $SSH_CLIENT | awk '{ print $1}'`
+route add $FROM_IP gw $GW

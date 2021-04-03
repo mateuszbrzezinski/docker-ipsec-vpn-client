@@ -197,7 +197,8 @@ echo "c myvpn" > /var/run/xl2tpd/l2tp-control
 
 #Setup routes
 GW="$(ip route | grep default | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")"
-route add $LOCAL_IP gw $GW
+echo $GW > /opt/src/GW
+#route add $LOCAL_IP gw $GW
 route add $PUBLIC_IP gw $GW
 #Wait necessary time for ppp0 to be created
 sleep 10

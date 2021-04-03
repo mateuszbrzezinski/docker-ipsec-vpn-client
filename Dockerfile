@@ -17,7 +17,14 @@ RUN DEBIAN_FRONTEND=noninteractive \
 RUN adduser --disabled-password --gecos "" mbvpn \
     && mkdir /home/mbvpn/.ssh \
     && chown mbvpn /home/mbvpn/.ssh \
-    && chmod 700 /home/mbvpn/.ssh
+    && chmod 700 /home/mbvpn/.ssh \
+    && echo "/home/mbvpn/.on_logout" >>  /home/mbvpn/.bash_logout
+
+COPY .ssh_rc /home/mbvpn/.ssh/rc
+RUN chmod 755 /home/mbvpn/.ssh/rc
+
+COPY  .on_logout /home/mbvpn/.on_logout
+RUN chmod 755 /home/mbvpn/.on_logout
 
 COPY ./run.sh /opt/src/run.sh
 RUN chmod 755 /opt/src/run.sh
