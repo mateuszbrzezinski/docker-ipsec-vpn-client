@@ -3,14 +3,22 @@ FROM_IP=$1
 GW=`cat /opt/src/GW`
 PUBLIC_IP=`cat /opt/src/PUBLIC_IP`
 
+echo ipsec start
 ipsec up myvpn
-#Start the L2TP connection:
+
+echo Start the L2TP connection:
 echo "c myvpn" > /var/run/xl2tpd/l2tp-control
 
 #Setup routes
+echo route add $FROM_IP gw $GW
 route add $FROM_IP gw $GW
+
+echo route add $PUBLIC_IP gw $GW
 route add $PUBLIC_IP gw $GW
-#Wait necessary time for ppp0 to be created
+
+echo Wait necessary time for ppp0 to be created
 sleep 5
+
+echo route add default dev ppp0
 route add default dev ppp0
 cat /etc/ppp/resolv.conf > /etc/resolv.conf

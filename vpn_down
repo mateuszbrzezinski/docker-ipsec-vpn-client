@@ -4,9 +4,17 @@ GW=`cat /opt/src/GW`
 PUBLIC_IP=`cat /opt/src/PUBLIC_IP`
 
 #del routes
+echo del $FROM_IP gw $GW
 route del $FROM_IP gw $GW
+
+echo del $PUBLIC_IP gw $GW
 route del $PUBLIC_IP gw $GW
+
+echo route del default dev ppp0
 route del default dev ppp0
 
+echo stop l2tp
 echo "d myvpn" > /var/run/xl2tpd/l2tp-control
+
+echo stop ipsec
 ipsec down myvpn
