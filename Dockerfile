@@ -10,13 +10,14 @@ RUN apt-get -yqq update \
          bsdmainutils libcurl3-nss \
 	 nano strongswan rsyslog ppp libpcap0.8
 
-RUN apt-get -yqq update \
-    && DEBIAN_FRONTEND=noninteractive \
+RUN DEBIAN_FRONTEND=noninteractive \
        apt-get -yqq --no-install-recommends install \
          ssh vim telnet curl python
 
-RUN adduser --disabled-password --gecos "" mbvpn && mkdir /home/mbvpn/.ssh
-RUN chmod 600 /home/mbvpn/.ssh
+RUN adduser --disabled-password --gecos "" mbvpn \
+    && mkdir /home/mbvpn/.ssh \
+    && chown mbvpn chmod /home/mbvpn/.ssh \
+    && 600 /home/mbvpn/.ssh
 
 COPY ./run.sh /opt/src/run.sh
 RUN chmod 755 /opt/src/run.sh
