@@ -48,11 +48,8 @@ mkdir -p /opt/src
 
 # Remove whitespace and quotes around VPN variables, if any
 VPN_IPSEC_PSK="$(nospaces "$VPN_IPSEC_PSK")"
-VPN_IPSEC_PSK="$(noquotes "$VPN_IPSEC_PSK")"
 VPN_USER="$(nospaces "$VPN_USER")"
-VPN_USER="$(noquotes "$VPN_USER")"
 VPN_PASSWORD="$(nospaces "$VPN_PASSWORD")"
-VPN_PASSWORD="$(noquotes "$VPN_PASSWORD")"
 
 if [ -z "$VPN_IPSEC_PSK" ] || [ -z "$VPN_USER" ] || [ -z "$VPN_PASSWORD" ]; then
   exiterr "All VPN credentials must be specified. Edit your 'env' file and re-enter them."

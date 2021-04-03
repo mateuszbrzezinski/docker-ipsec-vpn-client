@@ -1,4 +1,4 @@
 
 Cmnd_Alias VPN_CMDS = /opt/src/vpn_up, /opt/src/vpn_down
 
-mbvpn ALL=NOPASSWD: VPN_CMDS
+uvpn ALL=NOPASSWD: VPN_CMDS
