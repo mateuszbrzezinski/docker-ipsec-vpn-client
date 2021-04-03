@@ -3,6 +3,7 @@ FROM_IP=$1
 GW=`cat /opt/src/GW`
 PUBLIC_IP=`cat /opt/src/PUBLIC_IP`
 
+ipsec up myvpn
 #Start the L2TP connection:
 echo "c myvpn" > /var/run/xl2tpd/l2tp-control
 
