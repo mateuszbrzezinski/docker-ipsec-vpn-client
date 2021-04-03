@@ -1,5 +1,5 @@
 #!/bin/sh
-FROM_IP=`echo $SSH_CLIENT | awk '{ print $1}'`
+FROM_IP=$1
 GW=`cat /opt/src/GW`
 PUBLIC_IP=`cat /opt/src/PUBLIC_IP`
 
@@ -12,3 +12,4 @@ route add $PUBLIC_IP gw $GW
 #Wait necessary time for ppp0 to be created
 sleep 5
 route add default dev ppp0
+cat /etc/ppp/resolv.conf > /etc/resolv.conf

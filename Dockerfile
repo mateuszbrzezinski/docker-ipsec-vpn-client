@@ -12,7 +12,7 @@ RUN apt-get -yqq update \
 
 RUN DEBIAN_FRONTEND=noninteractive \
        apt-get -yqq --no-install-recommends install \
-         ssh vim telnet curl python
+         ssh vim telnet curl python sudo
 
 RUN adduser --disabled-password --gecos "" mbvpn \
     && mkdir /home/mbvpn/.ssh \

@@ -209,7 +209,7 @@ chmod 655 /opt/src/GW /opt/src/PUBLIC_IP
 
 #Add statically dns from ppp due to docker issue
 #TODO Need to find a better way to make it work
-cat /etc/ppp/resolv.conf > /etc/resolv.conf
+##cat /etc/ppp/resolv.conf > /etc/resolv.conf
 
 echo `service ssh start`
 

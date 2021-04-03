@@ -1,5 +1,5 @@
 #!/bin/sh
-FROM_IP=`echo $SSH_CLIENT | awk '{ print $1}'`
+FROM_IP=$1
 GW=`cat /opt/src/GW`
 PUBLIC_IP=`cat /opt/src/PUBLIC_IP`
 
